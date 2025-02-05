@@ -19,7 +19,23 @@ Answers:
     benchmarking can tell you which program performs better while profiling tells you which functions to focus on to 
     improve a program's performance.
 
-4.  A sample output is: . The execution time 
+4.  A sample output is: 
+
+         71 function calls (26 primitive calls) in 4.151 seconds
+
+   Ordered by: standard name
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    4.151    4.151 <string>:1(<module>)
+    55/10    0.000    0.000    0.000    0.000 ex3.py:28(sub_function)
+        1    0.000    0.000    0.000    0.000 ex3.py:35(test_function)
+        1    3.158    3.158    3.158    3.158 ex3.py:41(third_function)
+        1    0.993    0.993    4.151    4.151 ex3.py:45(main)
+        1    0.000    0.000    4.151    4.151 {built-in method builtins.exec}
+       10    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        
+    The execution time is the cumtime.
 '''
 
 import timeit
@@ -42,14 +58,11 @@ def third_function():
     # third function that calculates the square of the numbers from 0 to 999
     return [i**2 for i in range(100000000)]
 
-test_function()
-third_function()
-
-cProfile.run('test_function()')
-cProfile.run('third_function()')
-
 def main():
+    test_function()
+    third_function()
     return 0
 
 if __name__ == "__main__":
     main()
+    cProfile.run('main()')
