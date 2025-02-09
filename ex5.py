@@ -1,6 +1,8 @@
 import timeit
 from numpy import random
 import matplotlib.pyplot as plt
+import scipy
+import numpy as np
 
 def linear_search(array, elem):
     pos = 0
@@ -22,7 +24,12 @@ def binary_search(array, elem):
         elif array[mid] < elem:
             left = mid + 1
     return -1
-    
+
+def lin_func(x, a, b):
+    return a * x + b
+def log_func(x, a, b):
+    return a * np.log(x) + b
+
 def main():
     element_list = [1000, 2000, 4000, 8000, 16000]
     lin_time_list = []
@@ -37,23 +44,34 @@ def main():
         bin_time = 0
         for i in range(1000):
             x = random.randint(num)
-            lin_time += timeit.timeit(setup = time_setup, stmt = "linear_search(rand_array, x)", number = 10, globals = {"linear_search": linear_search, "rand_array": rand_array, "x": x, "num": num})
+            lin_time += timeit.timeit(setup = time_setup, stmt = "linear_search(rand_array, x)", number = 100, globals = {"linear_search": linear_search, "rand_array": rand_array, "x": x, "num": num})
             bin_time += timeit.timeit(setup = time_setup, stmt = "binary_search(rand_array, x)", number = 100, globals = {"binary_search": binary_search, "rand_array": rand_array, "x": x, "num": num})
         lin_time_list.append(lin_time/1000)
         bin_time_list.append(bin_time/1000)
 
+    #how to get equation of each fitline?
+    #linear fitline is wrong, in the slides he mentioned that "we already know how to fit a linear function from class"?
+    coeffs, covar = scipy.optimize.curve_fit(lin_func, element_list, bin_time_list)
+    a_fit, b_fit = coeffs
+    x_fit = np.linspace(min(element_list), max(element_list))
+    y_fit = lin_func(x_fit, a_fit, b_fit)
     plt.subplot(1, 2, 1)
     plt.plot(element_list, lin_time_list)
+    plt.plot(x_fit, y_fit, label = 'Linear Fit')
     plt.xlabel("Number of elements")
     plt.ylabel("Time")
     plt.title("Linear Search")
-    scipy.optimize.curve_fit()
+
+    coeffs, covar = scipy.optimize.curve_fit(log_func, element_list, bin_time_list)
+    a_fit, b_fit = coeffs
+    x_fit = np.linspace(min(element_list), max(element_list))
+    y_fit = log_func(x_fit, a_fit, b_fit)
     plt.subplot(1, 2, 2)
     plt.plot(element_list, bin_time_list)
+    plt.plot(x_fit, y_fit, label = 'Logarithmic Fit', color = 'green')
     plt.xlabel("Number of elements")
     plt.ylabel("Time")
     plt.title("Binary Search")
-    scipy.optimize.curve_fit()
     plt.show()
 
 if __name__ == "__main__":
