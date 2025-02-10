@@ -1,0 +1,8 @@
+1.  With no prior knowledge of the floor plan, not even knowing if the rooms are ordered, or doors on one wall or two walls, one would have to use linear search to find the room.
+2.  Using only the knowledge of the sign, we would walk left and start searching at EY100.Each step would be checking each room, and with the described floor plan, it will take 15 steps to find EY128.
+3.  It is neither a best-case nor a worst-case, but very close to the worst case, which is EY130.
+4.  Using linear search and the described floor layout, the best-case is when the desired room is the first room we check. When the desired room number is in range of EY 100-130, the best case is when the desired room is EY100, and when not in the range, the best case is EY138. Because the sign splits the rooms into two subarrays of unequal size, the worst case is when the desired room is the last element of the greater subarray, which is EY130.
+5.  With the new knowledge of the ordering of the rooms and the lowest and highest indexes of 100 and 138, we would be able to use an interval search to determine the range of where the desired room would be in. Interpolation search would improve our performance over binary in this case. Binary would start our search from EY118, whereas interpolation (using the implemented code from Exercise 2) would start our search from EY128, which is the best case scenario of the first room we check being our desired room. 
+Calculation of pos from code from exercise 2: 
+low = 0, high = 19, arr[low] = 100, arr[high] = 138, x = 128
+pos = 0 + ((19-0)/(138-100)*(128-100)) = 14, arr[14] = 128
