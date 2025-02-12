@@ -51,16 +51,21 @@ def main():
 
     #how to get equation of each fitline?
     #linear fitline is wrong, in the slides he mentioned that "we already know how to fit a linear function from class"?
+    slope, intercept = np.polyfit(element_list, lin_time_list, 1)
+    #plt.scatter(element_list, lin_time_list)
+    linevalues = [slope * x + intercept for x in element_list]
     coeffs, covar = scipy.optimize.curve_fit(lin_func, element_list, bin_time_list)
     a_fit, b_fit = coeffs
     x_fit = np.linspace(min(element_list), max(element_list))
-    y_fit = lin_func(x_fit, a_fit, b_fit)
+    y_fit = lin_func(x_fit, slope, slope)
     plt.subplot(1, 2, 1)
-    plt.plot(element_list, lin_time_list)
+    plt.plot(element_list, linevalues, 'r')
+    #plt.plot(element_list, lin_time_list)
     plt.plot(x_fit, y_fit, label = 'Linear Fit')
     plt.xlabel("Number of elements")
     plt.ylabel("Time")
     plt.title("Linear Search")
+    print("The linear model is: t = %.2e * n + %.2e" % (slope, intercept))
 
     coeffs, covar = scipy.optimize.curve_fit(log_func, element_list, bin_time_list)
     a_fit, b_fit = coeffs
@@ -78,6 +83,13 @@ if __name__ == "__main__":
     main()
 
 """
-Linear search was fitted by a linear function, and binary search was fitted by a logarithmic function.
+4.  (1) Linear search was fitted by a linear function, and binary search was fitted by a logarithmic function.
+        The parameters of the linear function are: x_fit, slope and slope where x_fit is an array of evenly spaced 
+        values between the minimum and maximum of element_list. The parameters of the logarithmic function are: x_fit, 
+        a_fit and b_fit where x_fit is the same as in the linear function and the a_fit and b_fit are coefficients of 
+        the logarithmic function.
+    (2) Yes, the results are what we expected. Since the time complexity for linear search is O(n), we expected the 
+        graph to be linear. The time complexity for binary search is O(log n) so we expected the graph to be 
+        logarithmic.
 
 """
