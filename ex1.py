@@ -5,9 +5,9 @@ If the value of n is anything other than 0 or 1, the function returns by recursi
 fibonacci value for n.
 
 Q2. Yes, this function uses the divide and conquer algorithm due to the fact it uses recursion and divides into two subproblems; however, it is very inefficient as it computes redundantly.
-When it gets divided into two subproblems, the subproblems share certain overlapping calculations. So yes, but more like divide and conquer done incorrectly.
+When it gets divided into two subproblems, the subproblems share overlapping calculations. So yes, but it is more like divide and conquer done incorrectly.
 
-Q3. The expression for the time complexity is T(n) is O(2^n)
+Q3. The expression for the time complexity is T(n) is O(2^n) (exponential due to redundant recursive calls)
 
 """
 import matplotlib.pyplot as plt
@@ -36,9 +36,15 @@ def fibonacci(n):
     cache[n] = fibonacci(n - 1) + fibonacci(n - 2)
     return cache[n]
 
+for i in range(35):
+    print(fibonacci(i))
+    
+"""
+Q5. The time complexity is now linear, T(n) is O(n) due to its avoidance in redundant recursive calls
+"""
 
 """
-Q5. The time complexity is now linear, T(n) is O(n)
+Q6. The following is the timining and plotting implementation
 """
 
 all_times_fast = []
