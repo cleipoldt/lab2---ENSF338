@@ -16,14 +16,14 @@ Answers:
 2.  Profiling differs from benchmarking as profiling provides a more in-depth analysis of code execution by focusing 
     on the performance of functions in the program, revealing which functions need further improvement. Benchmarking 
     is different as it measures the performance of the entire code without diving deeper into the little details. So 
-    benchmarking can tell you which program performs better while profiling tells you which functions to focus on to 
-    improve a program's performance.
+    benchmarking can tell you which program performs better while profiling tells you which functions you need to work 
+    on to improve a program's performance.
 
 4.  A sample output is: 
 
          71 function calls (26 primitive calls) in 4.151 seconds
 
-   Ordered by: standard name
+    Ordered by: standard name
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
         1    0.000    0.000    4.151    4.151 <string>:1(<module>)
@@ -35,7 +35,9 @@ Answers:
        10    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
         
-    The execution time is the cumtime.
+    In the sample output above we can see that there were 71 function calls with 26 of them being primitive that took 
+    a total of 4.151 seconds to complete. The ncalls column shows the number of calls each parts of the program 
+    required to make. The execution time goes in the cumtime column.
 '''
 
 import timeit

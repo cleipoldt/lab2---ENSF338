@@ -47,6 +47,10 @@ Q5. The time complexity is now linear, T(n) is O(n) due to its avoidance in redu
 Q6. The following is the timining and plotting implementation
 """
 
+"""
+Q6. The following is the timining and plotting implementation
+"""
+
 all_times_fast = []
 for i in range(35):
     exec_time_fast = timeit.timeit(lambda: fibonacci(i), number = 1)
@@ -62,7 +66,6 @@ for i in range(35):
 x_axis_fast = list(range(35))
 plt.figure(figsize = (10, 5))
 plt.plot(x_axis_fast, all_times_fast, marker='s', linestyle='--', color='r')
-
 plt.xlabel("All integers from 0 to 35")
 plt.ylabel("Execution times (secs)")
 plt.title("The execution times for each fibonnaci number up to 35 using memoization")
