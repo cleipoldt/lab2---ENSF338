@@ -49,10 +49,7 @@ def main():
         lin_time_list.append(lin_time/1000)
         bin_time_list.append(bin_time/1000)
 
-    #how to get equation of each fitline?
-    #linear fitline is wrong, in the slides he mentioned that "we already know how to fit a linear function from class"?
     slope, intercept = np.polyfit(element_list, lin_time_list, 1)
-    #plt.scatter(element_list, lin_time_list)
     linevalues = [slope * x + intercept for x in element_list]
     coeffs, covar = scipy.optimize.curve_fit(lin_func, element_list, bin_time_list)
     a_fit, b_fit = coeffs
@@ -60,7 +57,6 @@ def main():
     y_fit = lin_func(x_fit, slope, slope)
     plt.subplot(1, 2, 1)
     plt.plot(element_list, linevalues, 'r')
-    #plt.plot(element_list, lin_time_list)
     plt.plot(x_fit, y_fit, label = 'Linear Fit')
     plt.xlabel("Number of elements")
     plt.ylabel("Time")
